@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | QuestionnaireResponse implementation guidance
+title: QuestionnaireResponse Implementation Guidance
 keywords: questionnaireresponse, rest,
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -14,7 +14,7 @@ summary: QuestionnaireResponse resource implementation guidance
 ## QuestionnaireResponse: Implementation Guidance ##
 
 ### Usage ###
-The responses to a `Questionnaire` sent by the CDSS are communicated back by the EMS using the [QuestionnaireResponse](http://hl7.org/fhir/stu3/questionnaireresponse.html) resource. 
+The responses to a `Questionnaire` sent by the CDSS are communicated back by the EMS using the [CareConnect-QuestionnaireResponse-1](https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-QuestionnaireResponse-1) profile. 
 The EMS will present the question and the set of possible responses received from the CDSS to the user during an ongoing clinical evaluation process and any answers from the user will be used to populate a `QuestionnaireResponse`.  
  
 
@@ -70,7 +70,7 @@ Detailed implementation guidance for a `QuestionnaireResponse` resource in the C
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>Reference(Any)</td>
     <td>The subject of the questions</td>
-<td>This SHOULD NOT be populated.</td>
+<td>This MAY be populated with a reference to the <code class="highlighter-rouge">Patient</code> resource.</td>
 </tr>
 <tr>
   <td><code class="highlighter-rouge">context</code></td>

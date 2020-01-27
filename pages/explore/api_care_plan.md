@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | Care Plan
+title: Care Plan Implementation Guidance
 keywords: careplan, rest,
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -16,7 +16,7 @@ summary: CarePlan resource implementation guidance
 
 ## CarePlan: Implementation Guidance ##
 ### Usage ###
-Within the Clinical Decision Support API implementation, the [CarePlan](http://hl7.org/fhir/stu3/careplan.html) resource will be used to carry the care advice recommendation given by the CDSS.  
+Within the Clinical Decision Support API implementation, the [CareConnect-CarePlan-1](https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-CarePlan-1) profile will be used to carry the care advice recommendation given by the CDSS.
 This resource may also carry a recommendation of self-care.  
 
 
@@ -164,31 +164,31 @@ The table below gives implementation guidance in relation to the elements within
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>BackboneElement</td>
     <td>Action to occur as part of plan - provide a reference or detail, not both</td>
-<td>This SHOULD be populated by the CDSS using either the reference or the detail element. For example, it could carry a medication to be used, self-monitoring activities, laboratory tests planned.</td>
+<td>This SHOULD be populated by the CDSS using the detail element. If required, the reference element can be used. For example, it could carry a medication to be used, self-monitoring activities, laboratory tests planned.</td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.outcomeCodeableConcept</code></td>
+  <td><code class="highlighter-rouge">activity.<br>outcomeCodeableConcept</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>CodeableConcept</td>
     <td>Results of the activity <a href="https://www.hl7.org/fhir/stu3/valueset-care-plan-activity-outcome.html">Care Plan Activity Outcome (Example)</a></td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.outcomeReference</code></td>
+<td><code class="highlighter-rouge">activity.<br>outcomeReference</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>Reference<br>(Any)</td>
     <td>Appointment, Encounter, Procedure, etc.</td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.progress</code></td>
+  <td><code class="highlighter-rouge">activity.<br>progress</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>Annotation</td>
     <td>Comments about the activity status/progress</td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.reference</code></td>
+  <td><code class="highlighter-rouge">activity.<br>reference</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
          <td>Reference<br>(Appointment |<br>CommunicationRequest |<br>DeviceRequest |<br>MedicationRequest |<br>NutritionOrder |<br>Task |<br>ProcedureRequest |<br>ReferralRequest |<br>VisionPrescription |<br>RequestGroup)</td>
     <td>Activity details defined in specific resource</td>
@@ -202,112 +202,112 @@ The table below gives implementation guidance in relation to the elements within
 <td>This <a href="api_care_plan.html#activitydetail-element-of-the-careplan">element of note</a> SHOULD be populated by the CDSS, if the planned activity is not linked to specific resources such as a <code class="highlighter-rouge">MedicationRequest</code> or a <code class="highlighter-rouge">Procedure</code>.</td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.detail.category</code></td>
+  <td><code class="highlighter-rouge">activity.<br>detail.category</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>CodeableConcept</td>
     <td>diet | drug | encounter | observation | procedure | supply | other <a href="https://www.hl7.org/fhir/stu3/valueset-care-plan-activity-category.html">CarePlanActivityCategory (Example)</a></td>
 <td>This <a href="api_care_plan.html#activitydetailcategory-element-of-the-careplan">element of note</a> SHOULD be populated by the CDSS to provide a high-level categorisation of the type of planned activity.</td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.detail.definition</code></td>
+  <td><code class="highlighter-rouge">activity.<br>detail.definition</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
      <td>Reference<br>(PlanDefinition |<br>ActivityDefinition |<br>Questionnaire)</td>
     <td>Protocol or definition</td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.detail.code</code></td>
+  <td><code class="highlighter-rouge">activity.<br>detail.code</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>CodeableConcept</td>
     <td>Detail type of activity <a href="https://www.hl7.org/fhir/stu3/valueset-care-plan-activity.html">Care Plan Activity (Example)</a></td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.detail.reasonCode</code></td>
+  <td><code class="highlighter-rouge">activity.<br>detail.reasonCode</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>CodeableConcept</td>
     <td>Why activity should be done or why activity was prohibited <a href="https://www.hl7.org/fhir/stu3/valueset-activity-reason.html">Activity Reason (Example)</a></td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.reasonReference</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.reasonReference</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>Reference<br>(Condition)</td>
     <td>Condition triggering need for activity</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.goal</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.goal</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>Reference<br>(Goal)</td>
     <td>Goals this activity relates to</td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.detail.status</code></td>
+  <td><code class="highlighter-rouge">activity.<br>detail.status</code></td>
       <td><code class="highlighter-rouge">1..1</code></td>
     <td>code</td>
     <td>not-started | scheduled | in-progress | on-hold | completed | cancelled | unknown <a href="https://www.hl7.org/fhir/stu3/valueset-care-plan-activity-status.html">CarePlanActivityStatus (Required)</a></td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.statusReason</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.statusReason</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>string</td>
     <td>Reason for current status</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.prohibited</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.prohibited</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>boolean</td>
     <td>Do NOT do</td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">activity.detail.scheduled[x]</code></td>
+  <td><code class="highlighter-rouge">activity.<br>detail.scheduled[x]</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
      <td>Timing <br>Period <br>string</td>
     <td>When activity is to occur</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.location</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.location</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>Reference<br>(Location)</td>
     <td>Where it should happen</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.performer</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.performer</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>Reference<br>(Practitioner |<br>Organization |<br>RelatedPerson |<br>Patient |<br>CareTeam)</td>
     <td>Who will be responsible?</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.product[x]</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.product[x]</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
       <td>CodeableConcept<br>Reference<br>(Medication) |<br>Substance)</td>
     <td>What is to be administered/supplied <a href="https://www.hl7.org/fhir/stu3/valueset-medication-codes.html">SNOMED CT Medication Codes (Example)</a></td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.dailyAmount</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.dailyAmount</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>SimpleQuantity</td>
     <td>How to consume/day?</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.quantity</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.quantity</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>SimpleQuantity</td>
     <td>How much to administer/supply/consume</td>
 <td></td>
  </tr>
 <tr>
-<td><code class="highlighter-rouge">activity.detail.description</code></td>
+<td><code class="highlighter-rouge">activity.<br>detail.description</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>string</td>
     <td>Extra info describing activity to perform</td>
@@ -322,7 +322,7 @@ The table below gives implementation guidance in relation to the elements within
  </tr>
 </table>
 
-### CarePlan Elements of Note ### 
+### CarePlan Elements of note ### 
 
 #### Activity.reference element of the CarePlan ####  
 This element carries details of the proposed activity represented in a specific referenced resource. For example, if care advice which is a component of a triage outcome involves advice about how to give CPR, this could be modelled as a `ProcedureRequest` which could be referenced from the element.

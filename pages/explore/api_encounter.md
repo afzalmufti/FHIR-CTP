@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | Encounter implementation guidance
+title: Encounter Implementation Guidance
 keywords: encounter, rest,
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -14,7 +14,7 @@ summary: Encounter resource implementation guidance
 ## Encounter: Implementation Guidance ##
 
 ### Usage ###
-The [Encounter](http://hl7.org/fhir/stu3/encounter.html) resource is used to carry information arising from an interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.  
+The [CareConnect-Encounter-1](https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Encounter-1) profile is used to carry information arising from an interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.  
 In the CDS context, an encounter occurs for the duration of a patient’s interaction with a single service provider. 
 
 Detailed implementation guidance for an `Encounter` resource in the CDS context is given below:  
@@ -111,7 +111,7 @@ Detailed implementation guidance for an `Encounter` resource in the CDS context 
       <td><code class="highlighter-rouge">0..1</code></td>
  <td>Reference<br>(Patient |<br>Group)</td>
     <td>The patient or group present at the encounter</td>
-<td>This SHOULD NOT be populated.</td>
+<td>This SHOULD be populated with a reference to the <code class="highlighter-rouge">Patient</code> resource.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">episodeOfCare</code></td>
@@ -181,14 +181,14 @@ Detailed implementation guidance for an `Encounter` resource in the CDS context 
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>CodeableConcept</td>
     <td>Reason the encounter takes place (code) <a href="https://www.hl7.org/fhir/stu3/valueset-encounter-reason.html">Encounter Reason Codes (Preferred)</a></td>
-<td>This COULD be populated, but is not expected to be for unscheduled care.</td>
+<td>This MAY be populated, but is not expected to be for unscheduled care.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">diagnosis</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>BackboneElement</td>
     <td>The list of diagnoses relevant to this encounter</td>
-<td>This COULD be populated, but is not expected to be for unscheduled care.</td>
+<td>This MAY be populated, but is not expected to be for unscheduled care.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">diagnosis.condition</code></td>
@@ -201,7 +201,7 @@ Detailed implementation guidance for an `Encounter` resource in the CDS context 
   <td><code class="highlighter-rouge">diagnosis.role</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>CodeableConcept</td>
-    <td>Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …) <a href="https://www.hl7.org/fhir/stu3/valueset-diagnosis-role.html">DiagnosisRole (Preferred)</a></td>
+    <td>Role that this diagnosis has within the encounter <br>(e.g. admission, billing, discharge) <a href="https://www.hl7.org/fhir/stu3/valueset-diagnosis-role.html">DiagnosisRole (Preferred)</a></td>
 <td></td>
  </tr>
 <tr>
@@ -226,7 +226,7 @@ Detailed implementation guidance for an `Encounter` resource in the CDS context 
 <td>This SHOULD NOT be populated – if the patient is admitted, this will be a separate encounter.</td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.preAdmissionIdentifier</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">preAdmissionIdentifier</code></td>
     <td><code class="highlighter-rouge">0..1</code></td>
     <td>Identifier</td>
     <td>Pre-admission identifier</td>
@@ -240,49 +240,49 @@ Detailed implementation guidance for an `Encounter` resource in the CDS context 
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.admitSource</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">admitSource</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>CodeableConcept</td>
     <td>From where patient was admitted (physician referral, transfer) <a href="https://www.hl7.org/fhir/stu3/valueset-encounter-admit-source.html">AdmitSource (Preferred)</a></td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.reAdmission</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">reAdmission</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>CodeableConcept</td>
     <td>The type of hospital re-admission that has occurred (if any). If the value is absent, then this is not identified as a readmission <a href="https://www.hl7.org/fhir/stu3/v2/0092/index.html">v2 Re-Admission Indicator (Example)</a></td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.dietPreference</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">dietPreference</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>CodeableConcept</td>
     <td>Diet preferences reported by the patient <a href="https://www.hl7.org/fhir/stu3/valueset-encounter-diet.html">Diet (Example)</a></td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.specialCourtesy</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">specialCourtesy</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>CodeableConcept</td>
     <td>Special courtesies (VIP, board member) <a href="https://www.hl7.org/fhir/stu3/valueset-encounter-special-courtesy.html">SpecialCourtesy (Preferred)</a></td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.specialArrangement</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">specialArrangement</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>CodeableConcept</td>
     <td>Wheelchair, translator, stretcher, etc. <a href="https://www.hl7.org/fhir/stu3/valueset-encounter-special-arrangements.html">SpecialArrangements (Preferred)</a></td>
 <td></td>
  </tr>
 <tr>  
-<td><code class="highlighter-rouge">hospitalization.destination</code></td>
+<td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">destination</code></td>
   <td><code class="highlighter-rouge">0..1</code></td>
     <td>Reference<br>(Location)</td>
     <td>Location to which the patient is discharged</td>
 <td></td>
  </tr>
 <tr>
-  <td><code class="highlighter-rouge">hospitalization.dischargeDisposition</code></td>
+  <td><code class="highlighter-rouge">hospitalization.</code><br><code class="highlighter-rouge">dischargeDisposition</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>CodeableConcept</td>
     <td>Category or kind of location after discharge <a href="https://www.hl7.org/fhir/stu3/valueset-encounter-discharge-disposition.html">DischargeDisposition (Example)</a></td>

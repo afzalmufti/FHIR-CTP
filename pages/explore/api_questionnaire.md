@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | Questionnaire implementation guidance
+title: Questionnaire Implementation Guidance
 keywords: questionnaire, rest,
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -14,7 +14,7 @@ summary: Questionnaire resource implementation guidance
 ## Questionnaire: Implementation Guidance ##
 
 ### Usage ###
-The [Questionnaire](http://hl7.org/fhir/stu3/questionnaire.html) resource is used to send one or more questions from the CDSS to the EMS. The EMS will present the question and the set of possible responses received from the CDSS to the user during an ongoing clinical evaluation process.  
+The [CareConnect-Questionnaire-1](https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Questionnaire-1) profile is used to send one or more questions from the CDSS to the EMS. The EMS will present the question and the set of possible responses received from the CDSS to the user during an ongoing clinical evaluation process.  
 The responses to a `Questionnaire` sent by the CDSS are communicated back by the EMS using the `QuestionnaireResponse` resource.  
 
 Detailed implementation guidance for a `Questionnaire` resource in the CDS context is given below:  
@@ -223,7 +223,7 @@ Detailed implementation guidance for a `Questionnaire` resource in the CDS conte
       <td><code class="highlighter-rouge">0..*</code></td>
      <td>BackboneElement</td>
     <td>Only allow data when</td>
-<td>A conditional constraint on this item which allows <code class="highlighter-rouge">Questionnaires</code> to adapt based on answers to other questions. e.g. If a patient confirms that they s/he has had trouble sleeping, s/he will be asked "When did this start?".</td>
+<td>A conditional constraint on this item which allows <code class="highlighter-rouge">Questionnaires</code> to adapt based on answers to other questions e.g. if a patient confirms that s/he has had trouble sleeping, s/he will be asked "When did this start?".</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">item.enableWhen.question</code></td>

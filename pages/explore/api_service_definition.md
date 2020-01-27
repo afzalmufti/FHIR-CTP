@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | ServiceDefinition implementation guidance
+title: ServiceDefinition Implementation Guidance
 keywords: servicedefinition, rest, implementation guidance
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -14,11 +14,11 @@ summary: ServiceDefinition implementation guidance
 ## ServiceDefinition: Implementation Guidance ##  
 
 ### Usage ###
-The [Service Definition](http://hl7.org/fhir/stu3/servicedefinition.html) resource is published by the CDSS, describing what decisions the CDSS is able to provide support for. The resource describes in what circumstances the CDSS is valid, and what information is needed to render the decision.
+The [ServiceDefinition](http://hl7.org/fhir/stu3/servicedefinition.html) resource is published by the CDSS, describing what decisions the CDSS is able to provide support for. The resource describes in what circumstances the CDSS is valid, and what information is needed to render the decision.
 A CDSS can publish one or many `ServiceDefinition` resources. The resources SHOULD form a logically complete set. All CDSS MUST publish at least one `ServiceDefinition`.
 
 
-A `ServiceDefinition` can encapsulate any amount of information – some CDSS may find it simpler to have a single `ServiceDefinition`, and routing of patients through the CDSS is managed entirely within that single `ServiceDefinition`. Other CDSS may publish a different `ServiceDefinition` for different areas – for example, a `ServiceDefinition` for each presenting complaint. It is also possible to be even more granular, with a CDSS having a different `ServiceDefintion` for different complaints, and also for different types of user (e.g. headache for adult females, and a separate `ServiceDefinition` for headache for male children).
+A `ServiceDefinition` can encapsulate any amount of information – some CDSS may find it simpler to have a single `ServiceDefinition`, and routing of patients through the CDSS is managed entirely within that single `ServiceDefinition`. Other CDSS may publish a different `ServiceDefinition` for different areas – for example, a `ServiceDefinition` for each presenting complaint. It is also possible to be even more granular, with a CDSS having a different `ServiceDefinition` for different complaints, and also for different types of user (e.g. headache for adult females, and a separate `ServiceDefinition` for headache for male children).
 
 In general, more granular `ServiceDefinitions` will make change management simpler, as these can be updated without changing other `ServiceDefinitions`. Conversely, fewer `ServiceDefinitions` can make the triage journey simpler to control.
 
@@ -46,7 +46,7 @@ Details of how a `ServiceDefinition` SHOULD be implemented within the Clinical D
     <td><code class="highlighter-rouge">0..*</code></td>
     <td>Identifier</td>
     <td>Additional identifier for the service definition</td>
-<td>This is a business identifier and COULD be used to identify a <code class="highlighter-rouge">ServiceDefinition</code> where it is not possible to use the logical URI. This is generally used by FHIR servers.</td>
+<td>This is a business identifier and MAY be used to identify a <code class="highlighter-rouge">ServiceDefinition</code> where it is not possible to use the logical URI. This is generally used by FHIR servers.</td>
 </tr>
 <tr>
   <td><code class="highlighter-rouge">version</code></td>
@@ -144,7 +144,7 @@ Details of how a `ServiceDefinition` SHOULD be implemented within the Clinical D
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>UsageContext</td>
     <td>Context the content is intended to support</td>
-<td>This element SHOULD be populated with the appropriate expected usage of the <code class="highlighter-rouge">ServiceDefinition</code>. This will include patient gender, patient age group, user role/type.  These terms MAY be used to assist with indexing and searching for appropriate <code class="highlighter-rouge">ServiceDefinition</code> instances and so can assist an EMS in identifying the most appropriate service.</td>
+<td>This element SHOULD be populated with the appropriate expected usage of the <code class="highlighter-rouge">ServiceDefinition</code>. This will be determined by the EMS and CDSS specific to each implementation.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">jurisdiction</code></td>
@@ -165,7 +165,7 @@ Details of how a `ServiceDefinition` SHOULD be implemented within the Clinical D
       <td><code class="highlighter-rouge">0..*</code></td>
     <td>Contributor</td>
     <td>A content contributor</td>
-<td>The information in this element COULD be used to assist consumers in quickly determining who contributed to the content of the knowledge module.</td>
+<td>The information in this element MAY be used to assist consumers in quickly determining who contributed to the content of the knowledge module.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">contact</code></td>

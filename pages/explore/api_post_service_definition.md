@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | Evaluate ServiceDefinition interaction
+title: Evaluate ServiceDefinition Interaction
 keywords: servicedefinition, rest,
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -38,7 +38,7 @@ The `ServiceDefinition.$evaluate` operation is performed by an HTTP POST command
 POST [base]/ServiceDefinition/[id]/$evaluate</div>  
 
 ## Parameters ##
-The `ServiceDefinition.$evaluate` operation has a number of parameters and the EMS will select appropriate IN parameters to include in the operation.  
+The `ServiceDefinition.$evaluate` operation has a number of parameters and the EMS will select appropriate IN parameters to include in the operation. The [Parameters](https://fhir.nhs.uk/STU3/StructureDefinition/CDS-EvaluateServiceDefinition-Parameters-1) profile should be used to carry the parameter values.
 The CDSS will return a `GuidanceResponse` resource as the OUT parameter of the operation.  
 
 ### IN Parameters ###
@@ -78,7 +78,7 @@ If no value is provided, the date and time of the request is assumed.</td>
 </tr>
 <tr>
     <td><code class="highlighter-rouge">inputData</code></td>
-     <td><code class="highlighter-rouge">0..1</code></td>
+     <td><code class="highlighter-rouge">0..*</code></td>
     <td>Any</td>
     <td>The input data for the request. These data are defined by the data requirements of the module and typically provide patient-dependent information.</td>
    <td>The <a href="api_post_service_definition.html#inputdata-element">inputData element</a> MUST be populated with FHIR resources detailing the current state of the triage journey as follows:  
@@ -95,7 +95,7 @@ If no value is provided, the date and time of the request is assumed.</td>
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>Reference<br>(Patient)</td>
     <td>The patient in context, if any.</td>
-<td>This SHOULD NOT be populated.</td>
+<td>This MUST be populated with a reference to a <code class="highlighter-rouge">Patient</code> resource.</td>
  </tr>
 <tr>
    <td><code class="highlighter-rouge">encounter</code></td>

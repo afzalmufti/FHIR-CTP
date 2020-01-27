@@ -1,5 +1,5 @@
 ﻿---
-title: UEC Digital Integration Programme | Guidance Response implementation guidance
+title: Guidance Response Implementation Guidance
 keywords: guidanceresponse, rest,
 tags: [rest,fhir,api]
 sidebar: ctp_rest_sidebar
@@ -14,7 +14,10 @@ summary: GuidanceResponse implementation guidance
 -->
 
 ## GuidanceResponse: Implementation Guidance ##  
-The table below details implementation guidance for the [GuidanceResponse](http://hl7.org/fhir/stu3/guidanceresponse.html) resource in the CDS context:
+### Usage ###
+The [GuidanceResponse](http://hl7.org/fhir/stu3/guidanceresponse.html) resource carries the result of invoking a decision support service and is returned by a CDSS in response to the `ServiceDefinition.$evaluate` operation.  
+
+The table below details implementation guidance for the `GuidanceResponse` resource in the CDS context:
 
 <table style="min-width:100%;width:100%">
 
@@ -51,19 +54,20 @@ The table below details implementation guidance for the [GuidanceResponse](http:
       <td><code class="highlighter-rouge">1..1</code></td>
     <td>code</td>
     <td>Code datatype with Required binding to <a href="http://hl7.org/fhir/valueset-guidance-response-status.html">GuidanceResponseStatus</a></td>
-<td>The status of the <code class="highlighter-rouge">GuidanceResponse</code> is a <a href="api_guidance_response.html#status-of-the-guidanceresponse"> trigger for the EMS</a>.</td>
+<td>Allowable values are <code class="highlighter-rouge">success</code>, <code class="highlighter-rouge">data-requested</code>, <code class="highlighter-rouge">data-required</code>.<br/>
+The status of the <code class="highlighter-rouge">GuidanceResponse</code> is a <a href="api_return_guidance_response.html#status-of-the-returned-guidanceresponse"> trigger for the EMS</a>.</td>
 </tr>
 <tr>
   <td><code class="highlighter-rouge">subject</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
-    <td>Reference<br>(Patient|<br>Group)</td>
+    <td>Reference<br>(Patient |<br>Group)</td>
     <td>Patient the request was performed for.</td>
-<td>This SHOULD NOT be populated.</td>
+<td>This SHOULD be populated with a reference to the <code class="highlighter-rouge">Patient</code> resource.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">context</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
-    <td>Reference<br>(Encounter|<br>EpisodeOfCare)</td>
+    <td>Reference<br>(Encounter |<br>EpisodeOfCare)</td>
     <td>Encounter or Episode during which the response was returned.</td>
 <td>This MUST be populated with the Encounter for this journey, from the <code class="highlighter-rouge">ServiceDefinition.$evaluate.encounter</code>
 </td>
@@ -73,7 +77,7 @@ The table below details implementation guidance for the [GuidanceResponse](http:
       <td><code class="highlighter-rouge">0..1</code></td>
     <td>dateTime</td>
     <td>When the guidance response was processed.</td>
-<td>This MUST be populated by the CDSS and it represents the date/time at which the <code class="highlighter-rouge">GuidanceResponse</code> is returned to the CDSS. (This may differ from the time the message is received).</td>
+<td>This MUST be populated by the CDSS and it represents the date/time at which the <code class="highlighter-rouge">GuidanceResponse</code> is returned to the EMS. (This may differ from the time the message is received).</td>
 </tr>
 <tr>
   <td><code class="highlighter-rouge">performer</code></td>
@@ -85,14 +89,14 @@ The table below details implementation guidance for the [GuidanceResponse](http:
 <tr>
   <td><code class="highlighter-rouge">reason[x]</code></td>
       <td><code class="highlighter-rouge">0..1</code></td>
-    <td>CodeableConcept<br>Reference</td>
+    <td>CodeableConcept |<br>Reference</td>
     <td>Reason for the response.</td>
 <td>This SHOULD NOT be populated.</td>
  </tr>
 <tr>
   <td><code class="highlighter-rouge">note</code></td>
       <td><code class="highlighter-rouge">0..*</code></td>
-    <td>CodeableConcept<br>Annotation</td>
+    <td>CodeableConcept |<br>Annotation</td>
     <td>Additional notes about the response.</td>
 <td></td>
  </tr>

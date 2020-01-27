@@ -1,7 +1,7 @@
 entries:
 - title: Clinical Decision Support API
   product: Clinical Decision Support API
-  version: 0.9.0-experimental
+  version: 1.1.0-alpha
   levels: one
   folders:
 
@@ -78,7 +78,7 @@ entries:
         - title: Questionnaire/Response
           url: /api_get_questionnaire.html
           output: web
-        - title: Result
+        - title: Evaluation Response
           url: /api_return_guidance_response.html
           output: web  
       - title: Resources
@@ -99,6 +99,9 @@ entries:
         - title: Observation
           url: /api_observation.html
           output: web
+        - title: ProcedureRequest
+          url: /api_procedure_request.html
+          output: web
         - title: Provenance
           url: /api_provenance.html
           output: web
@@ -110,6 +113,9 @@ entries:
           output: web
         - title: ReferralRequest
           url: /api_referral_request.html
+          output: web
+        - title: SearchParameter
+          url: /api_searchparameter.html
           output: web
         - title: ServiceDefinition
           url: /api_service_definition.html
